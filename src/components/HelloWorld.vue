@@ -91,14 +91,20 @@
         data(){
             return{
                 count: 0,
-                goalCount: Math.floor(Math.random()*(50 - 25 ) + 25), //25에서 50 사이
-                duration: 30,
+                minGoalCount: 25,
+                maxGoalCount: 50,
+                lastGoalCount: 0,
+                goalCount: 0,
+                duration: 25,
                 currentTime: 0,
                 buttonName: "강아지",
                 step: 1,
                 level: 1,
-                failReason: null
+                failReason: null,
             }
+        },
+        mounted(){
+            this.goalCount = Math.floor(Math.random()*(this.maxGoalCount - this.minGoalCount ) + this.minGoalCount)
         },
         methods: {
             gameStart(event){ //게임 시작 이벤트
@@ -114,6 +120,10 @@
                             this.step = '3_success'
                             this.level++
                             this.failReason = null
+                            this.duration = this.duration - 2
+                            this.lastGoalCount = this.goalCount
+                            this.minGoalCount = this.lastGoalCount
+                            this.maxGoalCount = this.maxGoalCount + 5
 
                         }else{ //시간 초과
                             this.step = '3_fail'
@@ -132,7 +142,7 @@
                     this.count = 0
                     this.currentTime = 0
                     this.failReason = null
-                    this.goalCount = Math.floor(Math.random()*(50 - 25 ) + 25)
+                    this.goalCount = Math.floor(Math.random()*(this.maxGoalCount - this.minGoalCount ) + this.minGoalCount)
                 }
             },            
             counter(){ //게임 내 클릭 버튼 이벤트
