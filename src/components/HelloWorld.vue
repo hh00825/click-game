@@ -81,6 +81,21 @@
                 <button @click="gameStart($event)" data-setting="fail" class="button">다시 시작!</button>
             </div>
         </section>
+
+        <section class="section result-section" v-if="step=='final_success'">
+            <div class="contents-box">
+                <div class="top-text-box">                 
+                    <p class="main-title">최종 성공!!</p>                    
+                    <p class="main-title_desc">와.우. 정말 대단해요!<br/>진심으로 축하드립니다.</p>
+                    <div class="result-img">
+                        <img :src="require('../assets/final-success-img.jpg')" alt="최종 성공">
+                    </div>
+                </div>
+            </div>     
+            <div class="button-box">
+                <button @click="goMain($event)" class="button">메인으로 이동</button>
+            </div>
+        </section>
     </div>
 </template>
 <script>
@@ -90,6 +105,9 @@
         name: "HelloWorld",
         data(){
             return{
+                step: 1,
+                level: 1,
+                failReason: null,
                 count: 0,
                 minGoalCount: 25,
                 maxGoalCount: 50,
@@ -98,9 +116,6 @@
                 duration: 25,
                 currentTime: 0,
                 buttonName: "강아지",
-                step: 1,
-                level: 1,
-                failReason: null,
             }
         },
         mounted(){
@@ -124,6 +139,10 @@
                             this.lastGoalCount = this.goalCount
                             this.minGoalCount = this.lastGoalCount
                             this.maxGoalCount = this.maxGoalCount + 5
+
+                            if( this.duration < 3 ){
+                                this.step = 'final_success'
+                            }
 
                         }else{ //시간 초과
                             this.step = '3_fail'
@@ -150,6 +169,18 @@
             },            
             counter(){ //게임 내 클릭 버튼 이벤트
                 this.count++
+            },
+            goMain(){
+                this.step = 1                
+                this.level= 1
+                this.failReason = null
+                this.count = 0                
+                this.minGoalCount = 25
+                this.maxGoalCount = 50
+                this.lastGoalCount = 0
+                this.goalCount = Math.floor(Math.random()*(this.maxGoalCount - this.minGoalCount ) + this.minGoalCount)
+                this.duration = 22
+                this.currentTime = 0
             }
         }
     }
