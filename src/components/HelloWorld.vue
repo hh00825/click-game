@@ -4,8 +4,8 @@
         <section class="section intro-section" v-show="step==1">
             <div class="contents-box">
                 <div class="top-text-box">
-                    <p class="main-title">제한시간동안 {{buttonName}}를 마구마구 클릭하여 <br/>주어진 숫자를 만들어보세요.</p>
-                    <p class="main-title_desc">시간내에 숫자를 초과해도 탈락!</p>
+                    <p class="main-title">제한 시간 내에<br/>노출되는 이미지를 연타하여 <br/>주어진 숫자를 만들어보세요!</p>
+                    <p class="main-title_desc">시간 내에 숫자를 초과해도 탈락!!</p>
                 </div>
                 <div class="middle-main-box">
                     <div class="level-item">
@@ -18,7 +18,7 @@
             </div>
         </section>
 
-        <section class="section game-section" v-if="step==2">
+        <section class="section game-section no-button-box" v-if="step==2">
             <div class="contents-box">
                 <div class="top-text-box">
                     <strong class="current-stage">{{level}} 단계</strong>
@@ -54,10 +54,10 @@
                 <div class="top-text-box">
                     <strong class="current-stage">{{level-1}} 단계</strong>
                     <p class="main-title">성공!!</p>
+                    <p class="main-title_desc">축하합니다. <br/>다음단계로 넘어갑니다.</p>
                     <div class="result-img">
                         <img :src="require('../assets/success-img.jpg')" alt="성공">
                     </div>
-                    <p class="main-title">축하합니다. <br/>다음단계로 넘어갑니다.</p>
                 </div>
             </div>
             <div class="button-box">
@@ -69,12 +69,12 @@
             <div class="contents-box">
                 <div class="top-text-box">
                     <strong class="current-stage">{{level}} 단계</strong>                    
-                    <p class="main-title">실패...</p>
+                    <p class="main-title">실패...</p>                    
+                    <p class="main-title_desc" v-if="failReason =='numberOut'">숫자를 초과하였습니다.</p>
+                    <p class="main-title_desc" v-else-if="failReason =='timeOut'">시간을 초과하였습니다.</p>
                     <div class="result-img">
                         <img :src="require('../assets/fail-img.jpg')" alt="실패">
                     </div>
-                    <p class="main-title" v-if="failReason =='numberOut'">숫자를 초과하였습니다. <br/>다시 도전하세요 ㅠㅠ</p>
-                    <p class="main-title" v-else-if="failReason =='timeOut'">시간을 초과하였습니다. <br/>다시 도전하세요 ㅠㅠ</p>       
                 </div>
             </div>     
             <div class="button-box">
