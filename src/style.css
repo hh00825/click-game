@@ -53,6 +53,8 @@ table {
 	border-spacing: 0;
 }
 button {
+    color: inherit;
+    -webkit-appearance: none;
     cursor: pointer;
     border: none;
     padding: 0;

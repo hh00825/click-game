@@ -138,11 +138,14 @@
                     }
                 }, 1000)
 
-                if(event.target.getAttribute("data-setting") !=="init"){
+                if( event.target.getAttribute("data-setting") !=="init" ){
                     this.count = 0
                     this.currentTime = 0
                     this.failReason = null
-                    this.goalCount = Math.floor(Math.random()*(this.maxGoalCount - this.minGoalCount ) + this.minGoalCount)
+
+                    if( event.target.getAttribute("data-setting") =="success" ){
+                        this.goalCount = Math.floor(Math.random()*(this.maxGoalCount - this.minGoalCount ) + this.minGoalCount)                        
+                    }
                 }
             },            
             counter(){ //게임 내 클릭 버튼 이벤트
