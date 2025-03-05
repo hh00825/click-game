@@ -1,7 +1,7 @@
 
 <template>
     <div class="inner">
-        <section class="section intro-section" v-show="step==1">
+        <section class="section intro-section" v-if="step==1">
             <div class="contents-box">
                 <div class="top-text-box">
                     <p class="main-title">제한 시간 내에<br/>노출되는 이미지를 연타하여 <br/>주어진 숫자를 만들어보세요!</p>
@@ -102,7 +102,7 @@
     import '../style.css'
 
     export default{
-        name: "HelloWorld",
+        name: "ClickGame",
         data(){
             return{
                 step: 1,
@@ -179,7 +179,7 @@
                 this.maxGoalCount = 50
                 this.lastGoalCount = 0
                 this.goalCount = Math.floor(Math.random()*(this.maxGoalCount - this.minGoalCount ) + this.minGoalCount)
-                this.duration = 22
+                this.duration = 25
                 this.currentTime = 0
             }
         }
