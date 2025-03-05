@@ -120,6 +120,22 @@
         },
         mounted(){
             this.goalCount = Math.floor(Math.random()*(this.maxGoalCount - this.minGoalCount ) + this.minGoalCount)
+
+            //이미지 미리 로드
+            const images = [
+                require('../assets/click-target-img01.jpg'),
+                require('../assets/fail-img.jpg'),
+                require('../assets/final-success-img.jpg'),
+                require('../assets/success-img.jpg')
+            ];
+            images.forEach(image => {
+                const link = document.createElement("link");
+                link.rel = 'preload';
+                link.href = image;
+                link.as = 'image';
+                document.head.appendChild(link);
+            });
+            
         },
         methods: {
             gameStart(event){ //게임 시작 이벤트
